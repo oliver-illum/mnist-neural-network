@@ -1,0 +1,13 @@
+**/.env
+
+# Rust 
+/target/
+**/target/
+
+# Python
+**/__pycache__/
+*.py[cod]
+
+# Mac
+.DS_Store
+.DS_Store
