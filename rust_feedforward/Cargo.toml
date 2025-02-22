@@ -2,5 +2,11 @@
 name = "rust_feedforward"
 version = "0.1.0"
 edition = "2021"
+default-run = "rust_feedforward"
 
 [dependencies]
+flate2 = "1.0.35"
+image = "0.25.5"
+mnist = { version = "0.6", features = ["download"] }
+ndarray = "0.16.1"
+reqwest = { version = "0.12.12", features = ["blocking", "json"] }

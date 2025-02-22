@@ -1,4 +1,5 @@
 **/.env
+*/data
 
 # Rust 
 /target/
@@ -10,4 +11,7 @@
 
 # Mac
 .DS_Store
-.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
