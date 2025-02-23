@@ -29,6 +29,7 @@ pub fn load_dataset() -> Option<MNISTData> {
         .training_set_length(60_000)
         .validation_set_length(0)
         .test_set_length(10_000)
+        .base_path("../data")
         //.download_and_extract()
         .finalize();
 
