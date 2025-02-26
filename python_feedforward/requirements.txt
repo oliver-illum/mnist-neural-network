@@ -1,0 +1,3 @@
+python-mnist
+numpy
+requests
