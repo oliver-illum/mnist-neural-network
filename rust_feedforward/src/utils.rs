@@ -9,7 +9,7 @@ pub fn one_hot(labels: &Array1<u8>, num_classes: usize) -> Array2<f32> {
     one_hot
 }
 
-/// Compute the predicted class for each example using argmax.
+// Compute the predicted class for each example using argmax.
 pub fn predictions_to_labels(predictions: &Array2<f32>) -> Vec<u8> {
     predictions
         .outer_iter()
