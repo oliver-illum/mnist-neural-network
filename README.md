@@ -67,9 +67,17 @@ For now, this repository features a single feedforward (fully connected) neural 
    - Install the Rust toolchain (latest stable version) from [rust-lang.org](https://www.rust-lang.org/tools/install).
 
 2. **Build & Run:**
+
+   **Debug Mode:**
    ```bash
    cd rust_feedforward
    cargo run
+   ```
+
+   **Release Mode (Optimized):**
+   ```bash
+   cd rust_feedforward
+   cargo run --release
    ```
 
 3. **Data Setup:**
@@ -104,5 +112,23 @@ For now, this repository features a single feedforward (fully connected) neural 
 
 5. **Data Setup:**
    - The Python implementation loads the MNIST data from the shared `../data` folder.
-   - If the data is not present, it will automatically download it.
-## Results
+   - If the data is not present, it will automatically download it.`
+
+## Results Comparison
+
+The table below summarizes key metrics from both implementations. Note that the initial loss does not carry much meaning since the neural network is initialized with random weights.
+
+| **Metric**                   | **Python**                     | **Rust**                     |
+|------------------------------|--------------------------------|------------------------------|
+| **Initial Loss**             | 15.5750                        | 16.3138                      |
+| **Initial Training Accuracy**| 11.94%                         | 9.08%                        |
+| **Final Epoch Loss**         | 0.0049                         | 0.0076                       |
+| **Final Training Accuracy**  | 99.90%                         | 99.74%                       |
+| **Test Accuracy**            | 95.44%                         | 95.31%                       |
+| **Total Execution Time**     | 6 minutes 23.38 seconds        | 1 minute 11.94 seconds       |
+
+### Python Implementation Results
+![Python Results](assets/python_results.png)
+
+### Rust Implementation Results
+![Rust Results](assets/rust_results.png)

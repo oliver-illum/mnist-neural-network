@@ -30,9 +30,19 @@ fn main() {
     ];
     let mut net = NeuralNetwork::new(layers, 0.01);
 
-    let num_epochs = 100;
+    let num_epochs = 101;
     let batch_size = 64;
     let num_samples = training_subset.nrows();
+
+    
+    let start_time = std::time::Instant::now();
+
+    
+    let initial_predictions = net.forward(&training_subset);
+    let initial_loss = loss::cross_entropy_loss(&initial_predictions, &training_labels_onehot);
+    let initial_predicted_labels = predictions_to_labels(&initial_predictions);
+    let initial_accuracy = compute_accuracy(&initial_predicted_labels, &training_labels_subset);
+    println!("Initial Loss = {:.6}, Initial Accuracy = {:.2}%", initial_loss, initial_accuracy * 100.0);
 
     for epoch in 0..num_epochs {
         let mut epoch_loss = 0.0;
@@ -56,23 +66,31 @@ fn main() {
 
         epoch_loss /= batch_count as f32;
 
-        let final_predictions = net.forward(&training_subset);
-        let predicted_labels = predictions_to_labels(&final_predictions);
-        let accuracy = compute_accuracy(&predicted_labels, &training_labels_subset);
-
-        println!(
-            "Epoch {}: Loss = {:.6}, Training Accuracy = {:.2}%",
-            epoch,
-            epoch_loss,
-            accuracy * 100.0
-        );
+        
+        if epoch % 10 == 0 {
+            let final_predictions = net.forward(&training_subset);
+            let predicted_labels = predictions_to_labels(&final_predictions);
+            let accuracy = compute_accuracy(&predicted_labels, &training_labels_subset);
+            println!(
+                "Epoch {}: Loss = {:.6}, Training Accuracy = {:.2}%",
+                epoch,
+                epoch_loss,
+                accuracy * 100.0
+            );
+        }
     }
+
+    
+    let final_predictions = net.forward(&training_subset);
+    let predicted_labels = predictions_to_labels(&final_predictions);
+    let final_accuracy = compute_accuracy(&predicted_labels, &training_labels_subset);
+    println!("\nFinal Training Accuracy = {:.2}%", final_accuracy * 100.0);
 
     let test_predictions = net.forward(&test_images);
     let test_predicted_labels = predictions_to_labels(&test_predictions);
     let test_accuracy = compute_accuracy(&test_predicted_labels, &test_labels);
 
-    println!("\nTest Accuracy = {:.2}%", test_accuracy * 100.0);
+    println!("Test Accuracy = {:.2}%\n", test_accuracy * 100.0);
 
     println!("Sample test predictions:");
     for i in 0..10 {
@@ -81,6 +99,13 @@ fn main() {
             i, test_predicted_labels[i], test_labels[i]
         );
     }
+
+    
+    let duration = start_time.elapsed();
+    let total_seconds = duration.as_secs_f64();
+    let minutes = total_seconds as u64 / 60;
+    let seconds = total_seconds % 60.0;
+    println!("\nTotal execution time: {} minutes and {:.2} seconds", minutes, seconds);
 }
 
 #[allow(unused)]

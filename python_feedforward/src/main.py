@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 from dataset import load_dataset
 from layer import Layer
@@ -21,7 +22,7 @@ def run_main():
     layer2 = Layer(input_dim=128, output_dim=10, activation='softmax')
     network = NeuralNetwork(layers=[layer1, layer2], learning_rate=0.01)
 
-    epochs = 100
+    epochs = 101
     batch_size = 64
     
     initial_predictions = network.forward(X_train)
@@ -60,9 +61,11 @@ def run_main():
         test_predictions = predictions_to_labels(network.forward(X_test))
         test_actual = np.argmax(y_test, axis=1)
         test_accuracy = compute_accuracy(test_predictions, test_actual)
-
-        print(f"Epoch {epoch+1}/{epochs} - Loss: {epoch_loss:.4f}, Train Acc: {train_accuracy:.4f}, Test Acc: {test_accuracy:.4f}")
-        
+        if epoch % 10 == 0:
+            print(f"Epoch {epoch+1}/{epochs} - Loss: {epoch_loss:.4f}, Train Acc: {train_accuracy:.4f}, Test Acc: {test_accuracy:.4f}")
+    
+    print(f"\nFinal Training Accuracy: {train_accuracy:.4f}, Final Test Accuracy: {test_accuracy:.4f}")
+    
     final_test_predictions = predictions_to_labels(network.forward(X_test))
     final_test_actual = np.argmax(y_test, axis=1)
     print("\nSome test predictions:")
@@ -70,4 +73,10 @@ def run_main():
         print(f"Test Image {i}: Predicted: {final_test_predictions[i]}, Actual: {final_test_actual[i]}")
 
 if __name__ == '__main__':
+    start_time = time.time() 
     run_main()
+    end_time = time.time()
+    total_time = end_time - start_time
+    minutes = int(total_time // 60)
+    seconds = total_time % 60
+    print(f"\nTotal execution time: {minutes} minutes and {seconds:.2f} seconds")
