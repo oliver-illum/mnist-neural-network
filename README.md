@@ -61,4 +61,48 @@ For now, this repository features a single feedforward (fully connected) neural 
 
 ## Installation & Setup
 
+### For Rust
+
+1. **Prerequisites:**
+   - Install the Rust toolchain (latest stable version) from [rust-lang.org](https://www.rust-lang.org/tools/install).
+
+2. **Build & Run:**
+   ```bash
+   cd rust_feedforward
+   cargo run
+   ```
+
+3. **Data Setup:**
+   - Ensure the `data` folder is located at the root level of the repository.
+   - The Rust code will automatically download the MNIST data into this folder if it is not already present.
+
+---
+
+### For Python
+
+1. **Prerequisites:**
+   - Python 3.8+ (or your preferred version)
+   - A virtual environment tool (optional but recommended)
+
+2. **Setting Up the Virtual Environment:**
+   ```bash
+   cd python_feedforward
+   python -m venv venv
+   source venv/bin/activate   # On Windows, use: venv\Scripts\activate
+   ```
+
+3. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the Project:**
+   ```bash
+   cd src
+   python main.py
+   ```
+
+5. **Data Setup:**
+   - The Python implementation loads the MNIST data from the shared `../data` folder.
+   - If the data is not present, it will automatically download it.
 ## Results
