@@ -6,11 +6,9 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Project Structure](#project-structure)
 - [Neural Network Structure](#neural-network-structure)
 - [Installation & Setup](#installation--setup)
-- [Usage](#usage)
-- [Results](#results)
+- [Results](#results-comparison)
 
 ## Overview
 
