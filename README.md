@@ -62,21 +62,15 @@ The neural network is a feedforward (fully connected) model that processes norma
 ### Data Flow Diagram
 
 ```mermaid
-flowchart TD
-    A["Input Layer - Normalized MNIST Image"]
-    B["Hidden Layer 1"]
-    C["Activation - ReLU"]
-    D["Hidden Layer 2"]
-    E["Activation - ReLU"]
-    F["Output Layer - 10 Neurons"]
-    G["Loss Calculation - Cross-Entropy"]
-    
+flowchart LR
+    A["Input Layer (Normalized MNIST Image)"]
+    B["Hidden Layer 1 (ReLU)"]
+    C["Output Layer (Softmax, 10 Neurons)"]
+    D["Loss Calculation (Cross-Entropy)"]
+
     A --> B
     B --> C
     C --> D
-    D --> E
-    E --> F
-    F --> G
 ```
 ## Installation & Setup
 
